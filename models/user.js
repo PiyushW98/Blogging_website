@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const { createHmac, randomBytes } = require('crypto');
+const { createTokenForUser } = require('../services/auth');
 
 const userSchema = new Schema({
     fullName: {
@@ -45,7 +46,7 @@ userSchema.pre('save', function (next) {
     next();
 });
 
-userSchema.static('matchPassword', async function (email, password) {
+userSchema.static('matchPasswordAndGenerateToken', async function (email, password) {
     const user = await this.findOne({ email });
 
     //if user is not present in the database
@@ -60,7 +61,9 @@ userSchema.static('matchPassword', async function (email, password) {
         throw new Error('Invalid Credentials');
     }
 
-    return user;
+    const token = createTokenForUser(user);
+
+    return token;
 })
 
 const User = model('user', userSchema);

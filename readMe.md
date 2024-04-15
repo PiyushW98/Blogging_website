@@ -4,6 +4,7 @@ $install dependencies :
 > express (npm i express)
 > EJS (npm i ejs) : For server side rendering
 > mongoose (npm i mongoose) : For connecting with mongo DB
+> JWT(jsonwebtoken) (npm i jsonwebtoken) : for authentication
 
 [2] dev Dependencies
 
