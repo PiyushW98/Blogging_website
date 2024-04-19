@@ -9,14 +9,15 @@ const blogSchema = new Schema({
         type: String,
         required: true
     },
+    createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: "user",
+    },
     coverImageURL: {
         type: String,
         required: true,
     },
-    createdBy: {
-        type: Schema.Types.ObjectId,
-        ref: 'user',
-    },
+
 }, { timestamps: true });
 
 const Blog = model('blog', blogSchema);
